@@ -6,9 +6,8 @@
             </h2>
             <p>Hallo, {{ user.firstname }}</p>
         </template>
-
-        <div>
-            <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+        <div class="flex justify-center w-full">
+            <div class='m-6 max-w-3xl'>
                 <basic-element>
                     <template #title>
                         Leden gekoppeld aan dit account
@@ -30,8 +29,6 @@
                                     <i class="fas fa-plus-circle mr-2"></i> Voeg toe
                                 </custom-button>
                             </div>
-
-
                         </div>
 
                     </template>
@@ -43,51 +40,49 @@
                     <template #description></template>
                     <template #content>
                         <link-button :href="route('groepen.index')">Alle Groepen</link-button>
-                        
+
                     </template>
                 </basic-element>
-
-
-
-                <!-- Modal for member coupling or create new member-->
-                <jet-modal :show='isOpen' @close=closeModal()>
-                    <div class="p-6">
-                        <div class="py-4">
-                            <div class="text-xl">
-                                Nieuw lid toevoegen
-                            </div>
-                            <p>
-                                Controlleer hier eerst of het account nog niet bestaat. Wanneer het ledenaccount al bestaat, kunt u een koppeling aanvragen.
-                                Typ (een deel) van de naam of het emailadres in.
-                            </p>
-                        </div>
-                        <!-- check already existing users -->
-                        <find-member @filtered-members="updateFilteredMembers"/>
-
-                        <div v-for="member in filteredMembers" :key="member.id" class="py-1">
-                            {{ member.firstname }}
-                            <jet-button @click="coupleMemberUser(member)">Koppel</jet-button>
-                        </div>
-                        <div class="flex">
-                            <div>
-                                <input id="confirmSearch" type="checkbox" v-model="confirmSearch" v-on:change="toggleNew" class="mx-4">
-                            </div>
-                            <div>
-                                <label for="confirmSearch">Ik heb gezocht op naam en emailadres en het account bestaat nog niet*.</label>
-                            </div>
-                        </div>
-                        <!-- if not exist, make new user -->
-                        <div v-if="createNew">
-                            <div class="py-6">
-                                <h1 class="text-lg">Toevoegen</h1>
-                                <p>Voeg hier leden toe. Deze zijn vanuit dit account te beheren. Nieuwe leden moeten wel geaccepteerd worden door de administrator voordat deze gebruikt kan worden.</p>
-                                <member-form @close="closeModal" :form="form"/>
-                            </div>
-                        </div>
-                    </div>
-                </jet-modal>
             </div>
         </div>
+
+        <!-- Modal for member coupling or create new member-->
+        <jet-modal :show='isOpen' @close=closeModal()>
+            <div class="p-6">
+                <div class="py-4">
+                    <div class="text-xl">
+                        Nieuw lid toevoegen
+                    </div>
+                    <p>
+                        Controlleer hier eerst of het account nog niet bestaat. Wanneer het ledenaccount al bestaat, kunt u een koppeling aanvragen.
+                        Typ (een deel) van de naam of het emailadres in.
+                    </p>
+                </div>
+                <!-- check already existing users -->
+                <find-member @filtered-members="updateFilteredMembers"/>
+
+                <div v-for="member in filteredMembers" :key="member.id" class="py-1">
+                    {{ member.firstname }}
+                    <jet-button @click="coupleMemberUser(member)">Koppel</jet-button>
+                </div>
+                <div class="flex">
+                    <div>
+                        <input id="confirmSearch" type="checkbox" v-model="confirmSearch" v-on:change="toggleNew" class="mx-4">
+                    </div>
+                    <div>
+                        <label for="confirmSearch">Ik heb gezocht op naam en emailadres en het account bestaat nog niet*.</label>
+                    </div>
+                </div>
+                <!-- if not exist, make new user -->
+                <div v-if="createNew">
+                    <div class="py-6">
+                        <h1 class="text-lg">Toevoegen</h1>
+                        <p>Voeg hier leden toe. Deze zijn vanuit dit account te beheren. Nieuwe leden moeten wel geaccepteerd worden door de administrator voordat deze gebruikt kan worden.</p>
+                        <member-form @close="closeModal" :form="form"/>
+                    </div>
+                </div>
+            </div>
+        </jet-modal>
     </app-layout>
 </template>
 
@@ -159,8 +154,6 @@ export default {
         LinkButton,
         CustomButton,
         JetButton
-
-
     },
 }
 </script>

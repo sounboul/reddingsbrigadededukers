@@ -1,5 +1,5 @@
 <template>
-    <app-layout>
+    <app-layout @open-form="openModal()">
         <div class="flex justify-center">
             <div class=" w-8/12 bg-white pb-0 p-6 rounded-lg">
                 <div class="inline-flex space-x-4">
@@ -49,10 +49,11 @@
     import AppLayout from './../Layouts/AppLayout';
     import FlexItem from '@/custom/FlexItem';
 
+
     export default {
         components: {
             AppLayout,
             FlexItem,
-        }
+        },
     }
 </script>

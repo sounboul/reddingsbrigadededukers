@@ -4,6 +4,7 @@ Creating a new website
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
+* [Contributing](#contributing)
 
 ## General info
 This is a project to update the website for reddingsbrigade De Dukers (lifeguards).

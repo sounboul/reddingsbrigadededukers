@@ -5,15 +5,21 @@
                 {{ member.firstname }} {{ member.tussenvoegsel }} {{ member.lastname }}
             </h2>
         </template>
-        <div class=' m-10 px-4 py-5 bg-white sm:p-6 shadow rounded-md'>
+        <div class=' m-10 px-4 py-5 bg-white sm:p-6 shadow rounded-md space-x-4'>
             <div>
-                <div class="inline-block">
-                    {{ member.firstname }} {{ member.tussenvoegsel }} {{ member.lastname }}<br>
-                    {{ member.email }}<br>
-                    {{ member.dateofbirth }}<br>
+                <div class="space-x-4">
+                    <div class="inline-block">
+                         {{ member.firstname }} {{ member.tussenvoegsel }} {{ member.lastname }}<br>
+                        {{ member.email }}<br>
+                        {{ member.dateofbirth }}<br>
+                    </div>
+                    <div class="inline-block">
+                        <jet-button @click="edit(member)">Wijzigen</jet-button>
+                    </div>
+                    <div class="inline-block">
+                        <jet-button @click="decoupleMemberUser(member)">Ontkoppel</jet-button>
+                    </div>
                 </div>
-                <jet-button @click="edit(member)">Wijzigen</jet-button>
-                <jet-button @click="decoupleMemberUser(member)">Ontkoppel</jet-button>
             </div>
             <div>
                 <table class="table-auto">
