@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\ActiviteitenController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LedenController;
 use App\Http\Controllers\TimeslotController;
+use App\Http\Controllers\VerenigingController;
 use App\Http\Controllers\WaterhulpverleningController;
 use App\Http\Controllers\ZwemmendreddenController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +27,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/zwemmendredden', [ZwemmendreddenController::class, 'index'])->name('zwemmendredden');
 Route::get('/waterhulpverlening', [WaterhulpverleningController::class, 'index'])->name('waterhulpverlening');
 Route::get('/activiteiten', [ActiviteitenController::class, 'index'])->name('activiteiten');
+Route::get('/vereniging', [VerenigingController::class, 'index'])->name('vereniging');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 // Authenticate
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
