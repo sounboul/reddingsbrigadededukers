@@ -58,25 +58,35 @@
                                 From: "transform opacity-100 scale-100"
                                 To: "transform opacity-0 scale-95"
                             -->
-                            <div v-if="showingNavigationDropdown" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-                                <custom-dropdown-link :href="route('leden.index')">
-                                    Leden
-                                </custom-dropdown-link>
-                                <custom-dropdown-link :href="route('profile.show')" v-show="$page.props.user">
-                                    Profiel
-                                </custom-dropdown-link>
-                                <form @submit.prevent="logout" v-show="$page.props.user">
-                                    <custom-dropdown-link as="button">
-                                        Log uit
+                            <transition
+                                enter-active-class="transition-opacity duration-300"
+                                enter-from-class="opacity-0"
+                                enter-to-class="opacity-100"
+                                leave-active-class="transition-opacity duration-300"
+                                leave-from-class="opacity-100"
+                                leave-to-class="opacity-0"
+                            >
+                                <div v-if="showingNavigationDropdown" class="transition-opacity ease-in-out duration-100 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                                    <custom-dropdown-link :href="route('leden.index')">
+                                        Leden
                                     </custom-dropdown-link>
-                                </form>
+                                    <custom-dropdown-link :href="route('profile.show')" v-show="$page.props.user">
+                                        Profiel
+                                    </custom-dropdown-link>
+                                    <form @submit.prevent="logout" v-show="$page.props.user">
+                                        <custom-dropdown-link as="button">
+                                            Log uit
+                                        </custom-dropdown-link>
+                                    </form>
 
-                                <!--
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Your Profile</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Settings</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Sign out</a>
-                                -->
-                            </div>
+                                    <!--
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Your Profile</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Settings</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Sign out</a>
+                                    -->
+                                </div>
+                            </transition>
+
                         </div>
                     </div>
                 </div>

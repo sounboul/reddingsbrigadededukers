@@ -21104,7 +21104,7 @@ var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 
 var _hoisted_18 = {
   key: 0,
-  "class": "origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none",
+  "class": "transition-opacity ease-in-out duration-100 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none",
   role: "menu",
   "aria-orientation": "vertical",
   "aria-labelledby": "user-menu"
@@ -21287,44 +21287,58 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["active"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\n                                Dropdown menu, show/hide based on menu state.\n\n                                Entering: \"transition ease-out duration-100\"\n                                From: \"transform opacity-0 scale-95\"\n                                To: \"transform opacity-100 scale-100\"\n                                Leaving: \"transition ease-in duration-75\"\n                                From: \"transform opacity-100 scale-100\"\n                                To: \"transform opacity-0 scale-95\"\n                            "), $data.showingNavigationDropdown ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_dropdown_link, {
-    href: _ctx.route('leden.index')
+  , ["active"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\n                                Dropdown menu, show/hide based on menu state.\n\n                                Entering: \"transition ease-out duration-100\"\n                                From: \"transform opacity-0 scale-95\"\n                                To: \"transform opacity-100 scale-100\"\n                                Leaving: \"transition ease-in duration-75\"\n                                From: \"transform opacity-100 scale-100\"\n                                To: \"transform opacity-0 scale-95\"\n                            "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
+    "enter-active-class": "transition-opacity duration-300",
+    "enter-from-class": "opacity-0",
+    "enter-to-class": "opacity-100",
+    "leave-active-class": "transition-opacity duration-300",
+    "leave-from-class": "opacity-100",
+    "leave-to-class": "opacity-0"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_19];
+      return [$data.showingNavigationDropdown ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_dropdown_link, {
+        href: _ctx.route('leden.index')
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_19];
+        }),
+        _: 1
+        /* STABLE */
+
+      }, 8
+      /* PROPS */
+      , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_dropdown_link, {
+        href: _ctx.route('profile.show')
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_20];
+        }),
+        _: 1
+        /* STABLE */
+
+      }, 8
+      /* PROPS */
+      , ["href"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.$page.props.user]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
+        onSubmit: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+          return $options.logout && $options.logout.apply($options, arguments);
+        }, ["prevent"]))
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_dropdown_link, {
+        as: "button"
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_21];
+        }),
+        _: 1
+        /* STABLE */
+
+      })], 544
+      /* HYDRATE_EVENTS, NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.$page.props.user]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\n                                    <a href=\"#\" class=\"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100\" role=\"menuitem\">Your Profile</a>\n                                    <a href=\"#\" class=\"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100\" role=\"menuitem\">Settings</a>\n                                    <a href=\"#\" class=\"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100\" role=\"menuitem\">Sign out</a>\n                                    ")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
     _: 1
     /* STABLE */
 
-  }, 8
-  /* PROPS */
-  , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_dropdown_link, {
-    href: _ctx.route('profile.show')
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_20];
-    }),
-    _: 1
-    /* STABLE */
-
-  }, 8
-  /* PROPS */
-  , ["href"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.$page.props.user]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
-    onSubmit: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-      return $options.logout && $options.logout.apply($options, arguments);
-    }, ["prevent"]))
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_dropdown_link, {
-    as: "button"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_21];
-    }),
-    _: 1
-    /* STABLE */
-
-  })], 544
-  /* HYDRATE_EVENTS, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.$page.props.user]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\n                                <a href=\"#\" class=\"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100\" role=\"menuitem\">Your Profile</a>\n                                <a href=\"#\" class=\"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100\" role=\"menuitem\">Settings</a>\n                                <a href=\"#\" class=\"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100\" role=\"menuitem\">Sign out</a>\n                                ")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Mobile menu, show/hide based on menu state. "), $data.showingMobileMenu ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Current: \"bg-gray-900 text-white\", Default: \"text-gray-300 hover:bg-gray-700 hover:text-white\" "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_responsive_nav_link, {
+  })])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Mobile menu, show/hide based on menu state. "), $data.showingMobileMenu ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Current: \"bg-gray-900 text-white\", Default: \"text-gray-300 hover:bg-gray-700 hover:text-white\" "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_custom_responsive_nav_link, {
     href: _ctx.route('home')
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
