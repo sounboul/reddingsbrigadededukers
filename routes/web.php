@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\ActiviteitenController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LedenController;
 use App\Http\Controllers\TimeslotController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerenigingController;
 use App\Http\Controllers\WaterhulpverleningController;
 use App\Http\Controllers\ZwemmendreddenController;
@@ -42,4 +44,14 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::post('/decouplememberuser', [LedenController::class, 'decoupleUser'])->name('leden.decoupleUser');
     Route::post('/addMemberToGroup', [LedenController::class, 'addMemberToGroup'])->name('addMemberToGroup');
     Route::post('/removeMemberFromGroup', [LedenController::class, 'removeMemberFromGroup'])->name('removeMemberFromGroup');
+
+
+    // Admin
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::post('/confirmCouple', [AdminController::class, 'confirmCouple'])->name('confirmCouple');
+    Route::post('/unconfirmCouple', [AdminController::class, 'unconfirmCouple'])->name('unconfirmCouple');
+    Route::get('users/{username}', [UserController::class, 'show'])->name('user.show');
+    Route::post('/activateUser', [AdminController::class, 'activateUser'])->name('activateUser');
+    Route::post('/deactivateUser', [AdminController::class, 'deactivateUser'])->name('deactivateUser');
+
 });

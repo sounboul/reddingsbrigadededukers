@@ -63,6 +63,11 @@ class User extends Authenticatable
     ];
 
     public function members() {
-        return $this->BelongsToMany(Member::class);
+        return $this->BelongsToMany(Member::class)->withPivot('is_confirmed')->wherePivot('is_confirmed', 1);
     }
+
+    public function requestedMembers() {
+        return $this->BelongsToMany(Member::class)->withPivot('is_confirmed')->wherePivot('is_confirmed', 0);
+    }
+
 }

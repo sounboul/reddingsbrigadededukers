@@ -8,6 +8,7 @@
         </template>
         <div class="flex justify-center w-full">
             <div class='m-6 max-w-3xl'>
+
                 <basic-element>
                     <template #title>
                         Leden gekoppeld aan dit account
@@ -18,11 +19,24 @@
                     </template>
 
                     <template #content>
+
                         <div class="flex flex-col space-y-5 w-full">
                             <div v-for="member in user.members" :key='member.id' class="flex justify-center">
-                                <link-button :href="route('leden.show', member)">
-                                    {{ member.username }}
-                                </link-button>
+                                <div>
+                                    <link-button :href="route('leden.show', member)">
+                                        {{ member.username }}
+                                    </link-button>
+                                </div>
+                            </div>
+
+                            <div v-for="member in user.requested_members" :key='member.id' class="flex justify-center">
+                                <div>
+                                    
+                                    <link-button :href="route('leden.show', member)">
+
+                                        {{ member.username }} (aangevraagd)
+                                    </link-button>
+                                </div>
                             </div>
                             <div class="flex justify-center">
                                 <custom-button href="#" @click="openModal">

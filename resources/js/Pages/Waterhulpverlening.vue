@@ -5,51 +5,51 @@
         </template>
         <div class="flex w-full justify-center mt-6">
             <div class="flex flex-wrap justify-center w-8/12 p-6">
-                <flex-item @click="setTab(1)" @mouseover="setTab(1)" img="img/whvopleiding.jpeg" :isActive="currentTab == 1">
+                <flex-item @click="setTab(1); scrollToElement(this.$refs.tab1)" @mouseover="setTab(1)" img="img/whvopleiding.jpeg" :isActive="currentTab == 1">
                     <template #title>Opleiding tot Lifeguard</template>
-                    <template #content>Vanaf 12 jaar kun je meelopen tijdens bewakingen. Je wordt dan begeleid door een ervaren Lifeguard. Ook kun je starten met de Lifeguard opleiding.</template>
+                    <!-- <template #content>Vanaf 12 jaar kun je meelopen tijdens bewakingen. Je wordt dan begeleid door een ervaren Lifeguard. Ook kun je starten met de Lifeguard opleiding.</template> -->
                 </flex-item>
-                <flex-item @click="setTab(2)" @mouseover="setTab(2)" img="img/toezicht.jpeg" :isActive="currentTab == 2">
+                <flex-item @click="setTab(2); scrollToElement(this.$refs.tab2)" @mouseover="setTab(2)" img="img/toezicht.jpeg" :isActive="currentTab == 2">
                     <template #title>Toezicht bij evenementen</template>
-                    <template #content>Bij vele evenementen op en rondom het water zijn wij te vinden. Als reddingsbrigade kunnen wij assiteren bij het stukje waterveiligheid bij een evenement. </template>
+                    <!-- <template #content>Bij vele evenementen op en rondom het water zijn wij te vinden. Als reddingsbrigade kunnen wij assiteren bij het stukje waterveiligheid bij een evenement. </template> -->
                     <template #footer>
                         <jet-button v-on:click.prevent @click="openForm=true">Vraag assistentie</jet-button>
                     </template>
                 </flex-item>
-                <flex-item @click="setTab(1)" @mouseover="setTab(3)" img="img/omslag-1.png" :isActive="currentTab == 3">
+                <flex-item @click="setTab(1); scrollToElement(this.$refs.tab3)" @mouseover="setTab(3)" img="img/omslag-1.png" :isActive="currentTab == 3">
                     <template #title>De nationale reddingsvloot (NRV)</template>
-                    <template #content>Wanneer een deel van Nederland overstroomt, wordt onze reddingsbrigade opgeroepen om te helpen bij het evacueren van de bevolking. Ook kunnen wij ingezet worden om mensen in veiligheid te brengen en eerste hulp te verlenen in onderstroomde gebieden. </template>
+                    <!-- <template #content>Wanneer een deel van Nederland overstroomt, wordt onze reddingsbrigade opgeroepen om te helpen bij het evacueren van de bevolking. Ook kunnen wij ingezet worden om mensen in veiligheid te brengen en eerste hulp te verlenen in onderstroomde gebieden. </template> -->
                 </flex-item>
             </div>
         </div>
         <div class="justify-center m-6">
-            <div v-show="currentTab == 1">
+            <div v-show="currentTab == 1" ref="tab1">
                 <custom-tab>
                     <template #title>
                         Opleiding tot Lifeguard
                     </template>
                     <template #content>
-                        Text
+                        Vanaf 12 jaar kun je meelopen tijdens bewakingen. Je wordt dan begeleid door een ervaren Lifeguard. Ook kun je starten met de Lifeguard opleiding.
                     </template>
                 </custom-tab>
             </div>
-            <div v-show="currentTab == 2">
+            <div v-show="currentTab == 2" ref="tab2">
                 <custom-tab>
                     <template #title>
                         Toezicht bij evenementen
                     </template>
                     <template #content>
-                        Text
+                        Bij vele evenementen op en rondom het water zijn wij te vinden. Als reddingsbrigade kunnen wij assiteren bij het stukje waterveiligheid bij een evenement.
                     </template>
                 </custom-tab>
             </div>
-            <div v-show="currentTab == 3">
+            <div v-show="currentTab == 3" ref="tab3">
                 <custom-tab>
                     <template #title>
                         De nationale reddingsvloot
                     </template>
                     <template #content>
-                        Text
+                        Wanneer een deel van Nederland overstroomt, wordt onze reddingsbrigade opgeroepen om te helpen bij het evacueren van de bevolking. Ook kunnen wij ingezet worden om mensen in veiligheid te brengen en eerste hulp te verlenen in onderstroomde gebieden.
                     </template>
                 </custom-tab>
             </div>

@@ -9,7 +9,7 @@
             <div>
                 <div class="space-x-4">
                     <div class="inline-block">
-                         {{ member.firstname }} {{ member.tussenvoegsel }} {{ member.lastname }}<br>
+                        {{ member.firstname }} {{ member.tussenvoegsel }} {{ member.lastname }}<br>
                         {{ member.email }}<br>
                         {{ member.dateofbirth }}<br>
                     </div>

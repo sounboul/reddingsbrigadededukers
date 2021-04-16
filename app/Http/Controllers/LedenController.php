@@ -14,9 +14,15 @@ class LedenController extends Controller
 {
     public function index()
     {
-        //change members to members only atttached to account
-        $user = User::with('members')->find(auth()->id());
 
+        $user = User::with(['members' => function($q)
+            {
+                $q->select('username', 'member_id');
+            }, 'requestedMembers' => function($q)
+            {
+                $q->select('username', 'member_id');
+            }
+            ])->select('id', 'username')->find(auth()->id());
         return inertia('Leden/Index', [
             'user' => $user,
         ]);
@@ -50,7 +56,8 @@ class LedenController extends Controller
 
     public function store(CreateMemberRequest $request)
     {
-        Member::create($request->validated());
+        $member = Member::create($request->validated());
+        $member->users()->attach(Auth::id());
         return redirect()->back()->with('message', 'Lid succesvol aangemaakt');
     }
 

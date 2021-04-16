@@ -1,5 +1,5 @@
 <template>
-    <div v-if="href" class="flex max-w-sm xl:w-1/3 px-3 py-3 justify-center">
+    <div v-if="href" class="flex max-w-md xl:w-1/3 px-3 py-3 justify-center">
         <div class="flex-1 rounded-lg overflow-hidden bg-white shadow-xl transform hover:scale-110 duration-500 ease-in-out">
             <inertia-link :href="href">
                 <img class="w-full h-56 object-cover" :src="img"/>
