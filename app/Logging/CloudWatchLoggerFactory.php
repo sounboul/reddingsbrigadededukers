@@ -35,7 +35,7 @@ class CloudWatchLoggerFactory {
         $retentionDays = 30;
 
         // Instantiate handler (tags are optional)
-        $handler = new CloudWatch($client, $groupName, $streamName, $retentionDays, 10000, $tags);
+        $handler = new CloudWatch($client, $groupName, $streamName, $retentionDays, 0, $tags);
 
         // Optionally set the JsonFormatter to be able to access your log messages in a structured way
         $handler->setFormatter(new JsonFormatter());
