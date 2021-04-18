@@ -11,8 +11,19 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerenigingController;
 use App\Http\Controllers\WaterhulpverleningController;
 use App\Http\Controllers\ZwemmendreddenController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 
+/*
+|-----------------------
+| Force https
+|-----------------------
+*/
+
+if (App::environment('production')) {
+    URL::forceScheme('https');
+}
 
 /*
 |--------------------------------------------------------------------------
