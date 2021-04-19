@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Foundation\Inspiring;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,16 @@ use Illuminate\Support\Facades\Artisan;
 | simple approach to interacting with each command's IO methods.
 |
 */
+
+/*
+|-----------------------
+| Force https
+|-----------------------
+*/
+
+if (App::environment('production')) {
+    URL::forceScheme('https');
+}
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
