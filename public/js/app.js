@@ -19100,6 +19100,14 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     setTab: function setTab(tab) {
       this.currentTab = tab;
+    },
+    scrollToElement: function scrollToElement(el) {
+      if (el) {
+        console.log('if');
+        el.scrollIntoView({
+          behavior: 'smooth'
+        });
+      }
     }
   }
 });
@@ -19164,8 +19172,6 @@ __webpack_require__.r(__webpack_exports__);
       this.currentTab = tab;
     },
     scrollToElement: function scrollToElement(el) {
-      console.log(el);
-
       if (el) {
         console.log('if');
         el.scrollIntoView({
@@ -25905,8 +25911,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_flex_item, {
         onClick: _cache[1] || (_cache[1] = function ($event) {
           $options.setTab(1);
-
-          _ctx.scrollToElement(_this.$refs.tab1);
+          $options.scrollToElement(_this.$refs.tab1);
         }),
         onMouseover: _cache[2] || (_cache[2] = function ($event) {
           return $options.setTab(1);
@@ -25925,8 +25930,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["isActive"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_flex_item, {
         onClick: _cache[5] || (_cache[5] = function ($event) {
           $options.setTab(2);
-
-          _ctx.scrollToElement(_this.$refs.tab2);
+          $options.scrollToElement(_this.$refs.tab2);
         }),
         onMouseover: _cache[6] || (_cache[6] = function ($event) {
           return $options.setTab(2);
@@ -25959,8 +25963,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["isActive"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_flex_item, {
         onClick: _cache[7] || (_cache[7] = function ($event) {
           $options.setTab(1);
-
-          _ctx.scrollToElement(_this.$refs.tab3);
+          $options.scrollToElement(_this.$refs.tab3);
         }),
         onMouseover: _cache[8] || (_cache[8] = function ($event) {
           return $options.setTab(3);

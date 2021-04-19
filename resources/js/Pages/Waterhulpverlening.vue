@@ -7,18 +7,15 @@
             <div class="flex flex-wrap justify-center w-8/12 p-6">
                 <flex-item @click="setTab(1); scrollToElement(this.$refs.tab1)" @mouseover="setTab(1)" img="img/whvopleiding.jpeg" :isActive="currentTab == 1">
                     <template #title>Opleiding tot Lifeguard</template>
-                    <!-- <template #content>Vanaf 12 jaar kun je meelopen tijdens bewakingen. Je wordt dan begeleid door een ervaren Lifeguard. Ook kun je starten met de Lifeguard opleiding.</template> -->
                 </flex-item>
                 <flex-item @click="setTab(2); scrollToElement(this.$refs.tab2)" @mouseover="setTab(2)" img="img/toezicht.jpeg" :isActive="currentTab == 2">
                     <template #title>Toezicht bij evenementen</template>
-                    <!-- <template #content>Bij vele evenementen op en rondom het water zijn wij te vinden. Als reddingsbrigade kunnen wij assiteren bij het stukje waterveiligheid bij een evenement. </template> -->
                     <template #footer>
                         <jet-button v-on:click.prevent @click="openForm=true">Vraag assistentie</jet-button>
                     </template>
                 </flex-item>
                 <flex-item @click="setTab(1); scrollToElement(this.$refs.tab3)" @mouseover="setTab(3)" img="img/omslag-1.png" :isActive="currentTab == 3">
                     <template #title>De nationale reddingsvloot (NRV)</template>
-                    <!-- <template #content>Wanneer een deel van Nederland overstroomt, wordt onze reddingsbrigade opgeroepen om te helpen bij het evacueren van de bevolking. Ook kunnen wij ingezet worden om mensen in veiligheid te brengen en eerste hulp te verlenen in onderstroomde gebieden. </template> -->
                 </flex-item>
             </div>
         </div>
@@ -79,6 +76,13 @@
         methods: {
             setTab(tab) {
                 this.currentTab = tab
+            },
+            
+            scrollToElement(el) {
+                if (el) {
+                    console.log('if')
+                    el.scrollIntoView({behavior: 'smooth'})
+                }
             }
         }
     }

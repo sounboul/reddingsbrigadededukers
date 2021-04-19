@@ -76,11 +76,9 @@
         methods: {
             setTab(tab) {
                 this.currentTab = tab
-
             },
+            
             scrollToElement(el) {
-
-                console.log(el)
                 if (el) {
                     console.log('if')
                     el.scrollIntoView({behavior: 'smooth'})

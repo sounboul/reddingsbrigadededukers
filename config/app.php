@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => array_key_exists('APP_URL', $_SERVER) ? $_SERVER['APP_URL'] : env('APP_URL', 'http://localhost'),
 
     'asset_url' => env('ASSET_URL', null),
 
