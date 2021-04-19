@@ -29,6 +29,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $APP_ENV = array_key_exists('APP_ENV', $_SERVER) ? $_SERVER['APP_ENV'] : env('APP_ENV', 'production');
+        if ($APP_ENV !== 'local') {
+            URL::forceScheme('https');
+        }
         Inertia::share([
             'errors' => function () {
                 return Session::get('errors')
