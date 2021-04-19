@@ -29,9 +29,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (App::environment('production')) {
-            URL::forceScheme('https');
-        }
+
+        URL::forceScheme('https');
+
         Inertia::share([
             'errors' => function () {
                 return Session::get('errors')
