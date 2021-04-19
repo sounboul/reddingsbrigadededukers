@@ -32,6 +32,10 @@ class Member extends Model
         return $this->belongsToMany(Group::class);
     }
 
+    public function isInGroup(Group $group) {
+        return $this->groups->where('id', $group->id)->count() > 0;
+    }
+
     /*public function getDateofbirthAttribute($date)
     {
         return Carbon::parse($date)->format('d-M-Y');

@@ -73,30 +73,45 @@ class LedenController extends Controller
         //couple member_user
         $member = Member::find($request->input('id'));
         $user = Auth::user();
-        $member->users()->attach($user);
-        return redirect()->route('leden.index')->with('message', 'Koppeling aangevraagd');
+
+        //check if connected
+        if (!$member->users->contains($user))
+        {
+            $member->users()->attach($user);
+            return redirect()->route('leden.index')->with('message', 'Koppeling aangevraagd');
+        }
+
     }
 
     public function decoupleUser(Request $request) {
         $member = Member::find($request->input('id'));
         $user = Auth::user();
-        $member->users()->detach($user);
-        return redirect()->route('leden.index')->with('message', 'Lid ontkoppeld');
+        if ($member->users->contains($user))
+        {
+            $member->users()->detach($user);
+            return redirect()->route('leden.index')->with('message', 'Lid ontkoppeld');
+        }
     }
 
     public function addMemberToGroup(Request $request) {
         //couple member_group
         $group = Group::find($request->input('groupID'));
         $member = Member::find($request->input('memberID'));
-        $group->members()->attach($member);
-        return redirect()->back()->with('message', 'Groep gekoppeld');
+        if (!$group->members->contains($member))
+        {
+            $group->members()->attach($member);
+            return redirect()->back()->with('message', 'Groep gekoppeld');
+        }
     }
 
     public function removeMemberFromGroup(Request $request) {
         //decouple member_group
         $group = Group::find($request->input('groupID'));
         $member = Member::find($request->input('memberID'));
-        $group->members()->detach($member);
-        return redirect()->back()->with('message', 'Groep ontkoppeld');
+        if (!$group->members->contains($member))
+        {
+            $group->members()->detach($member);
+            return redirect()->back()->with('message', 'Groep ontkoppeld');
+        }
     }
 }

@@ -32,7 +32,12 @@
             </div>
         </jet-modal>
         <jet-modal :show='addMember' @close="addMember=false">
-            <div class="p-6">
+            <div class="relative p-6">
+                <div class="absolute top-4 right-4">
+                    <button @click="addMember=false">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
                 <find-member @filtered-members="updateFilteredMembers"/>
                 <table class="table-auto mt-6 my-6">
                     <tbody>
