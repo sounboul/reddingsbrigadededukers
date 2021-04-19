@@ -1,6 +1,8 @@
 <?php
 
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\URL;
 use Laravel\Fortify\Features;
 
 return [
@@ -62,6 +64,9 @@ return [
     */
 
     'home' => function(){
+        if (App::environment('production')) {
+            URL::forceScheme('https');
+        }
         return route('leden');
     },
 
