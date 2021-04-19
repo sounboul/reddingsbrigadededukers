@@ -15,16 +15,6 @@ use Illuminate\Support\Facades\URL;
 |
 */
 
-/*
-|-----------------------
-| Force https
-|-----------------------
-*/
-
-if (App::environment('production')) {
-    URL::forceScheme('https');
-}
-
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });

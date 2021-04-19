@@ -37,11 +37,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /* Force https */
-        if (App::environment('production')) {
-            URL::forceScheme('https');
-        }
-
         $this->configureRateLimiting();
 
         $this->routes(function () {
