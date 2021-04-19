@@ -67,7 +67,7 @@ return [
         if (App::environment('production')) {
             URL::forceScheme('https');
         }
-        return route('leden');
+        return route('leden.index');
     },
 
     /*
