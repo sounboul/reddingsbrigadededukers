@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
@@ -16,8 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if (!app()->isLocal())
-        {
+        if (App::environment('production')) {
             URL::forceScheme('https');
         }
     }
@@ -29,8 +29,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $APP_ENV = array_key_exists('APP_ENV', $_SERVER) ? $_SERVER['APP_ENV'] : env('APP_ENV', 'production');
-        if ($APP_ENV !== 'local') {
+        if (App::environment('production')) {
             URL::forceScheme('https');
         }
         Inertia::share([
