@@ -15,9 +15,12 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
     public function register()
     {
-
+        if (App::environment('production')) {
+            $this->app['request']->server->set('HTTPS', true);
+        }
     }
 
     /**
@@ -30,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
 
         if (App::environment('production')) {
             URL::forceScheme('https');
-        } 
+        }
 
         Inertia::share([
             'errors' => function () {
