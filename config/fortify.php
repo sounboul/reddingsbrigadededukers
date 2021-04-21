@@ -62,7 +62,7 @@ return [
     */
 
     'home' => function(){
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('leden.index');
     },
 
     /*
