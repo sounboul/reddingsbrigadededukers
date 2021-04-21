@@ -33,9 +33,6 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (App::environment('production')) {
-            URL::forceScheme('https');
-        }
 
         Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
