@@ -114,7 +114,6 @@
             },
 
             update() {
-                console.log('update')
                 this.form._method = 'PUT';
                 this.form.post('/leden/' + this.member, {
                     errorBag: 'updateMember',

@@ -13,7 +13,7 @@
         <div class="flex">
             <crud-button v-show="!editMode" type="submit" :disabled="form.processing">Toevoegen</crud-button>
             <crud-button v-show="editMode" type="button" @click="update()" :disabled="form.processing">Update</crud-button>
-            <crud-button v-show="editMode" type="button" @click="deleteMember()" :disabled="form.processing">Delete</crud-button>
+            <crud-button v-show="editMode" type="button" @click="deleteGroup()" :disabled="form.processing">Delete</crud-button>
             <crud-button type="button" @click="$emit('close')">Cancel</crud-button>
         </div>
     </form>
@@ -77,22 +77,19 @@
             },
 
             update() {
-                console.log('update')
                 this.form._method = 'PUT';
                 this.form.post('/groepen/' + this.group, {
                     errorBag: 'updateGroup',
                     preserveScrol: true
                 });
-
                 this.$emit('close');
             },
 
-            deleteMember() {
-                console.log('delete')
+            deleteGroup() {
                 if (!confirm('Weet je het zeker?')) return;
                 this.form._method = 'DELETE';
                 this.form.post('/groepen/' + this.group, {
-                    errorBag: 'updateMember',
+                    errorBag: 'deleteGroup',
                     preserveScrol: true
                 });
                 this.$emit('close');
