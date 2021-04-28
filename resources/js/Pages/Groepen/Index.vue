@@ -4,24 +4,42 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Groepen
             </h2>
-            <p>Hallo, {{ $page.props.user.firstname }}</p>
+            <p>Hallo,</p>
         </template>
 
-        <div>
-            <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-                <jet-button @click="openModal()">
-                    Voeg groep toe
-                </jet-button>
-                <jet-modal :show='isOpen' @close=closeModal()>
-                    <div class="p-6">
-                        <group-form @close="closeModal()" :form="form" />
-                    </div>
-                </jet-modal>
-                <div v-for="group in groups" :key="group.id">
-                    <group-item :group='group'/>
-                </div>
+        <div class="flex justify-center w-full">
+            <div class='m-6 max-w-3xl'>
+                <basic-element>
+                    <template #title>
+                        Groepen
+                    </template>
+                    <template #description>
+                        Overzicht van alle groepen
+                    </template>
+                    <template #content>
+                        <div class="flex flex-col space-y-5 w-full">
+                            <div v-for="group in groups" :key="group.id" class="flex justify-center">
+                                <div>
+                                    <!-- {{ group.name }} -->
+                                    <group-item :group='group'/>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <jet-button @click="openModal()">
+                                Voeg groep toe
+                            </jet-button>
+                        </div>
+                    </template>
+                </basic-element>
             </div>
         </div>
+
+        <jet-modal :show='isOpen' @close=closeModal()>
+            <div class="p-6">
+                <group-form @close="closeModal()" />
+            </div>
+        </jet-modal>
     </app-layout>
 </template>
 
@@ -31,6 +49,7 @@
     import JetModal from '@/Jetstream/Modal'
     import GroupItem from '@/custom/GroupItem.vue'
     import GroupForm from '@/custom/GroupForm.vue'
+    import BasicElement from '@/custom/BasicElement.vue'
 
     export default {
         props: {
@@ -49,12 +68,6 @@
         data: function() {
             return {
                 isOpen: false,
-                form: this.$inertia.form({
-                    _method: 'POST',
-                    id: '',
-                    name: '',
-                    description: '',
-                }),
             }
         },
 
@@ -64,6 +77,7 @@
             JetModal,
             GroupItem,
             GroupForm,
+            BasicElement,
         },
     }
 </script>

@@ -11,7 +11,7 @@
                     <span class="font-bold">{{ group.name }}</span><br>
                     {{ group.description }}<br>
                 </div>
-                <jet-button class="mx-4" @click="edit(group)">Wijzigen</jet-button>
+                <jet-button class="mx-4" @click="editMember">Wijzigen</jet-button>
                 <jet-button class="mx-4" @click="addMember=true">Leden toevoegen</jet-button>
             </div>
             <div class="mt-10">
@@ -28,7 +28,7 @@
         </div>
         <jet-modal :show='isOpen' @close=closeModal()>
             <div class="p-6">
-                <group-form @close="closeModal()" :form="form" :group="group" :editMode="editMode" />
+                <group-form @close="closeModal()" :group="group" :editMode="editMode" />
             </div>
         </jet-modal>
         <jet-modal :show='addMember' @close="addMember=false">
@@ -41,7 +41,6 @@
                 <find-member @filtered-members="updateFilteredMembers"/>
                 <table class="table-auto mt-6 my-6">
                     <tbody>
-
                             <tr v-for="member in filteredMembers" :key="member.id">
                                 <td class="py-3 px-2">
                                     {{ member.firstname }} {{ member.tussenvoegsel }} {{ member.lastname }}
@@ -77,10 +76,7 @@ export default {
             this.isOpen = false;
         },
 
-        edit: function (group) {
-            this.form.id = group.id,
-            this.form.name = group.name,
-            this.form.description = group.description,
+        editMember: function () {
             this.editMode = true;
             this.openModal();
         },

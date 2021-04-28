@@ -12,7 +12,7 @@ class GroupController extends Controller
     public function index()
     {
         //Load groups
-        $groups = Group::get();
+        $groups = Group::all();
         return inertia('Groepen/Index', [
             'groups' => $groups,
         ]);
@@ -38,7 +38,7 @@ class GroupController extends Controller
         Group::find($request->input('id'))->update($request->validated());
         return redirect()->route('groepen.show', $request->input('name'));
     }
-    
+
     public function destroy(Request $request)
     {
         if ($request->has('id')) {

@@ -71,8 +71,10 @@
         },
 
         props: {
-            member: Object,
-            form: Object,
+            member: {
+                type: Object,
+                default: {},
+            },
             editMode: Boolean,
             deleteModal: false,
         },
@@ -81,6 +83,17 @@
             return {
                 isOpen: false,
                 createNew: false,
+                form: this.$inertia.form({
+                _method: 'POST',
+                id: '',
+                firstname: '',
+                tussenvoegsel: '',
+                lastname: '',
+                username: '',
+                email: '',
+                dateofbirth: '',
+            }),
+
             }
         },
 
@@ -88,6 +101,7 @@
             reset: function () {
                 if (this.editMode) {
                     this.form = {
+                        id: '',
                         firstname: '',
                         tussenvoegsel: '',
                         lastname: '',
@@ -108,10 +122,7 @@
                 this.editmode = false;
 
             },
-            edit(member) {
-                this.form = Object.assign({}, member);
-                this.editMode = true
-            },
+
 
             update() {
                 this.form._method = 'PUT';
@@ -132,7 +143,20 @@
             }
         },
 
-        emits: ['close']
+        emits: ['close'],
+
+        created: function() {
+            if (this.member) {
+                this.form.id = this.member.id;
+                this.form.firstname = this.member.firstname;
+                this.form.tussenvoegsel = this.member.tussenvoegsel;
+                this.form.lastname = this.member.lastname;
+                this.form.username = this.member.username;
+                this.form.email = this.member.email;
+                this.form.dateofbirth = this.member.dateofbirth;
+            }
+
+        }
     }
 </script>
 

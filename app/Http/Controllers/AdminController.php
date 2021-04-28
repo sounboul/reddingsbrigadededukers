@@ -47,4 +47,34 @@ class AdminController extends Controller
         $user->save();
         return redirect()->back();
     }
+
+    public function makeAdmin(Request $request) {
+        $user = User::find($request->input('userID'));
+        $user->is_admin = true;
+        $user->save();
+        return redirect()->back();
+    }
+
+    public function delAdmin(Request $request) {
+        $user = User::find($request->input('userID'));
+        $user->is_admin = false;
+        $user->save();
+        return redirect()->back();
+    }
+
+    public function makeInstructor(Request $request) {
+        $user = User::find($request->input('userID'));
+        $user->is_instructor = true;
+        $user->save();
+        return redirect()->back();
+    }
+
+    public function delInstructor(Request $request) {
+        $user = User::find($request->input('userID'));
+        $user->is_instructor = false;
+        $user->save();
+        return redirect()->back();
+    }
+
+
 }

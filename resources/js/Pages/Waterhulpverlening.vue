@@ -4,7 +4,7 @@
             Waterhulpverlening
         </template>
         <div class="flex w-full justify-center mt-6">
-            <div class="flex flex-wrap justify-center w-8/12 p-6">
+            <div class="flex flex-wrap justify-center w-full p-6">
                 <flex-item @click="setTab(1); scrollToElement(this.$refs.tab1)" @mouseover="setTab(1)" img="img/whvopleiding.jpeg" :isActive="currentTab == 1">
                     <template #title>Opleiding tot Lifeguard</template>
                 </flex-item>
@@ -77,7 +77,7 @@
             setTab(tab) {
                 this.currentTab = tab
             },
-            
+
             scrollToElement(el) {
                 if (el) {
                     console.log('if')

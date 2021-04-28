@@ -8,7 +8,7 @@
                 Vul het formulier in om contact met ons op te nemen.
             </p>
         </div>
-        <form @submit.prevent="send">
+        <form @submit.prevent="sendMail">
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="name" value="Naam" />
                 <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" ref="name" autocomplete="name" placeholder="Naam"/>
@@ -88,8 +88,8 @@ import JetActionMessage from '@/Jetstream/ActionMessage'
                 isOpen: false,
                 createNew: false,
                 form: this.$inertia.form({
-                    _method: 'POST',
                     name: '',
+                    email: '',
                     message: '',
                 }),
 
@@ -97,52 +97,29 @@ import JetActionMessage from '@/Jetstream/ActionMessage'
         },
 
         methods: {
-            reset: function () {
-                if (this.editMode) {
-                    this.form = {
-                        name: '',
-                        description: '',
-                        diploma: '',
-                    }
-                }
-            },
-            store() {
-                this.form.post('/groepen', {
-                    errorBag: 'storeGroup',
-                    preserveScrol: true
-                })
-                this.reset();
-                this.$emit('close');
-                this.editmode = false;
+            // reset: function () {
+            //     if (this.editMode) {
+            //         this.form = {
+            //             name: '',
+            //             email: '',
+            //             description: '',
+            //             diploma: '',
+            //         }
+            //     }
+            // },
 
-            },
+            sendMail: function () {
+                this.form.method = 'POST';
+                this.form.post('/contact', {
+                    errorBag: 'sendMail',
+                    preserveScrol: true,
+                    onSuccess: () => this.form.reset
 
-            edit(group) {
-                this.form = Object.assign({}, group);
-                this.editMode = true
-            },
-
-            update() {
-                console.log('update')
-                this.form._method = 'PUT';
-                this.form.post('/groepen/' + this.group, {
-                    errorBag: 'updateGroup',
-                    preserveScrol: true
                 });
 
-                this.$emit('close');
-            },
 
-            deleteMember() {
-                console.log('delete')
-                if (!confirm('Weet je het zeker?')) return;
-                this.form._method = 'DELETE';
-                this.form.post('/groepen/' + this.group, {
-                    errorBag: 'updateMember',
-                    preserveScrol: true
-                });
-                this.$emit('close');
             }
+
         },
 
         emits: ['close']

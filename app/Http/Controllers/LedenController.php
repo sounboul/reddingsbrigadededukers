@@ -22,7 +22,7 @@ class LedenController extends Controller
             {
                 $q->select('username', 'member_id');
             }
-            ])->select('id', 'username')->find(auth()->id());
+            ])->select('id', 'username','is_admin','is_groupeditor','is_instructor')->find(auth()->id());
         return inertia('Leden/Index', [
             'user' => $user,
         ]);

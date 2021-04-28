@@ -14,7 +14,7 @@
                         {{ member.dateofbirth }}<br>
                     </div>
                     <div class="inline-block">
-                        <jet-button @click="edit(member)">Wijzigen</jet-button>
+                        <jet-button @click="editMember()">Wijzigen</jet-button>
                     </div>
                     <div class="inline-block">
                         <jet-button @click="decoupleMemberUser(member)">Ontkoppel</jet-button>
@@ -34,7 +34,7 @@
         </div>
         <jet-modal :show='isOpen' @close=closeModal()>
             <div class="p-6">
-                <member-form @close="closeModal()" :form="form" :editMode="editMode" />
+                <member-form @close="closeModal()" :member=member :editMode="editMode" />
             </div>
         </jet-modal>
     </app-layout>
@@ -59,18 +59,6 @@ export default {
             this.isOpen = false;
         },
 
-        edit: function (member) {
-            this.form.id = member.id,
-            this.form.firstname = member.firstname,
-            this.form.tussenvoegsel = member.tussenvoegsel,
-            this.form.lastname = member.lastname,
-            this.form.username = member.username,
-            this.form.email = member.email,
-            this.form.dateofbirth = member.dateofbirth,
-            this.editMode = true;
-            this.openModal();
-        },
-
         decoupleMemberUser(member) {
             member._method = 'POST';
             this.$inertia.post('/decouplememberuser/', member)
@@ -81,6 +69,12 @@ export default {
             this.groupForm.groupID = groupID
             this.$inertia.post('/removeMemberFromGroup/', this.groupForm)
         },
+
+        editMember() {
+            this.editMode=true;
+            this.openModal();
+
+        }
     },
 
     components: {
@@ -94,16 +88,6 @@ export default {
         return {
             isOpen: false,
             editMode: false,
-            form: this.$inertia.form({
-                _method: 'POST',
-                id: '',
-                firstname: '',
-                tussenvoegsel: '',
-                lastname: '',
-                username: '',
-                email: '',
-                dateofbirth: '',
-            }),
             groupForm: this.$inertia.form({
                 _method: 'POST',
                 memberID: '',

@@ -4,11 +4,29 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Leden
             </h2>
-            <p>Hallo, {{ user.firstname }}</p>
+            <p>Hallo, {{ $page.props.user.firstname }}</p>
         </template>
         <div class="flex justify-center w-full">
-            <div class='m-6 max-w-3xl'>
+            <div class="p-6 max-w-3xl">
+                <basic-element>
+                    <template #title>
+                        Informatie
+                    </template>
+                    <template #description>
+                    </template>
+                    <template #content>
+                        <div>
+                            Je bent:
+                            <ul>
+                                <li v-if="user.is_admin">admin</li>
+                                <li v-if="user.is_instructor">instructeur</li>
+                                <li v-if="user.is_groupeditor">editor</li>
+                            </ul>
 
+
+                        </div>
+                    </template>
+                </basic-element>
                 <basic-element>
                     <template #title>
                         Leden gekoppeld aan dit account
@@ -19,6 +37,8 @@
                     </template>
 
                     <template #content>
+
+                        <div v-if="user.is_admin">Is admin</div>
 
                         <div class="flex flex-col space-y-5 w-full">
                             <div v-for="member in user.members" :key='member.id' class="flex justify-center">
@@ -31,7 +51,7 @@
 
                             <div v-for="member in user.requested_members" :key='member.id' class="flex justify-center">
                                 <div>
-                                    
+
                                     <link-button :href="route('leden.show', member)">
 
                                         {{ member.username }} (aangevraagd)
@@ -59,7 +79,6 @@
                 </basic-element>
             </div>
         </div>
-
         <!-- Modal for member coupling or create new member-->
         <jet-modal :show='isOpen' @close=closeModal()>
             <div class="p-6">
@@ -92,7 +111,7 @@
                     <div class="py-6">
                         <h1 class="text-lg">Toevoegen</h1>
                         <p>Voeg hier leden toe. Deze zijn vanuit dit account te beheren. Nieuwe leden moeten wel geaccepteerd worden door de administrator voordat deze gebruikt kan worden.</p>
-                        <member-form @close="closeModal" :form="form"/>
+                        <member-form @close="closeModal" />
                     </div>
                 </div>
             </div>
@@ -109,8 +128,6 @@ import BasicElement from '@/custom/BasicElement'
 import LinkButton from '@/custom/LinkButton'
 import CustomButton from '@/custom/CustomButton'
 import JetButton from '@/Jetstream/Button'
-
-
 
 export default {
     props: {
@@ -134,8 +151,6 @@ export default {
             this.createNew = !this.createNew
         },
         coupleMemberUser(member) {
-            console.log('couple')
-            console.log(member)
             member._method = 'POST';
             this.$inertia.post('/couplememberuser/', member)
             this.$emit('close')
@@ -147,16 +162,6 @@ export default {
             filteredMembers: Object,
             confirmSearch: false,
             createNew: false,
-            form: this.$inertia.form({
-                _method: 'POST',
-                id: '',
-                firstname: '',
-                tussenvoegsel: '',
-                lastname: '',
-                username: '',
-                email: '',
-                dateofbirth: '',
-            }),
         }
     },
     components: {

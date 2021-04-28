@@ -36,13 +36,26 @@
 
                     <template #content>
                         <div class="flex flex-col space-y-5 w-full">
-                            <div v-for="user in users" :key='user.id' class="flex justify-center space-x-2">
+                            <table class="table-auto">
+                                <tbody>
+                                    <tr v-for="user in users" :key='user.id' class="flex justify-center space-x-2">
+                                        <td><inertia-link :href="route('user.show', user)">{{ user.username }}</inertia-link></td>
+                                        <td>
+                                            <custom-button v-if="!user.is_active" @click="activateUser(user.id)" color="yellow"><i class="fas fa-user-slash"></i></custom-button>
+                                            <custom-button v-if="user.is_active" @click="deactivateUser(user.id)" color="green"><i class="fas fa-user-check"></i></custom-button>
+                                        </td>
+                                        <td>
+                                            <custom-button v-if="!user.is_admin" @click="makeAdmin(user.id)" color="yellow"><i class="fas fa-lock"></i></custom-button>
+                                            <custom-button v-if="user.is_admin" @click="delAdmin(user.id)" color="green"><i class="fas fa-unlock"></i></custom-button>
+                                        </td>
+                                        <td>
+                                            <custom-button v-if="!user.is_instructor" @click="makeInstructor(user.id)" color="yellow"><i class="fas fa-university"></i></custom-button>
+                                            <custom-button v-if="user.is_instructor" @click="delInstructor(user.id)" color="green"><i class="fas fa-university"></i></custom-button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-                                    <inertia-link :href="route('user.show', user)">{{ user.username }}</inertia-link>
-                                    <custom-button v-if="!user.is_active" @click="activateUser(user.id)" color="green"><i class="fas fa-user-check"></i></custom-button>
-                                    <custom-button v-if="user.is_active" @click="deactivateUser(user.id)" color="yellow"><i class="fas fa-user-slash"></i></custom-button>
-
-                            </div>
                         </div>
 
                     </template>
@@ -120,7 +133,24 @@ export default {
         deactivateUser(userID) {
             this.coupleForm.userID = userID
             this.$inertia.post('/deactivateUser/', this.coupleForm)
-        }
+        },
+        makeAdmin(userID) {
+            this.coupleForm.userID = userID
+            this.$inertia.post('/makeAdmin/', this.coupleForm)
+        },
+        delAdmin(userID) {
+            this.coupleForm.userID = userID
+            this.$inertia.post('/delAdmin/', this.coupleForm)
+        },
+
+        makeInstructor(userID) {
+            this.coupleForm.userID = userID
+            this.$inertia.post('/makeInstructor/', this.coupleForm)
+        },
+        delInstructor(userID) {
+            this.coupleForm.userID = userID
+            this.$inertia.post('/delInstructor/', this.coupleForm)
+        },
     },
     data: function() {
         return {

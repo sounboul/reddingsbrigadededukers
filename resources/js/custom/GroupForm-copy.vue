@@ -39,11 +39,11 @@
             CrudButton,
         },
         props: {
-            editMode: Boolean,
             group: {
                 type: Object,
-                default: {},
-            }
+                default: null,
+                },
+            editMode: Boolean,
         },
 
         data() {
@@ -51,6 +51,7 @@
                 isOpen: false,
                 createNew: false,
                 form: this.$inertia.form({
+                    _method: 'POST',
                     id: '',
                     name: '',
                     description: '',
@@ -59,23 +60,32 @@
         },
 
         methods: {
+            reset: function () {
+                if (this.editMode) {
+                    this.form = {
+                        id: '',
+                        name: '',
+                        description: '',
+                    }
+                }
+            },
             store() {
-                this.form.method = 'POST'
                 this.form.post('/groepen', {
                     errorBag: 'storeGroup',
                     preserveScrol: true,
-                    onFinish: () => this.form.reset,
-
+                    onFinish: () => this.form.reset
                 });
-                this.$emit('close');
+                // this.reset();
+                // this.$emit('close');
+                // this.editmode = false;
+
             },
 
 
 
             update() {
-
                 this.form._method = 'PUT';
-                this.form.put('/groepen/' + this.group, {
+                this.form.post('/groepen/' + this.group, {
                     errorBag: 'updateGroup',
                     preserveScrol: true
                 });
@@ -85,7 +95,7 @@
             deleteGroup() {
                 if (!confirm('Weet je het zeker?')) return;
                 this.form._method = 'DELETE';
-                this.form.delete('/groepen/' + this.group, {
+                this.form.post('/groepen/' + this.group, {
                     errorBag: 'deleteGroup',
                     preserveScrol: true
                 });

@@ -31,6 +31,7 @@ Route::get('/waterhulpverlening', [WaterhulpverleningController::class, 'index']
 Route::get('/activiteiten', [ActiviteitenController::class, 'index'])->name('activiteiten');
 Route::get('/vereniging', [VerenigingController::class, 'index'])->name('vereniging');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'sendMail'])->name('contact.sendMail');
 
 // Authenticate
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
@@ -52,6 +53,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::post('/unconfirmCouple', [AdminController::class, 'unconfirmCouple'])->name('unconfirmCouple');
     Route::get('users/{username}', [UserController::class, 'show'])->name('user.show');
     Route::post('/activateUser', [AdminController::class, 'activateUser'])->name('activateUser');
-    Route::post('/deactivateUser', [AdminController::class, 'deactivateUser'])->name('deactivateUser');
+    Route::post('/makeAdmin', [AdminController::class, 'makeAdmin'])->name('makeAdmin');
+    Route::post('/delAdmin', [AdminController::class, 'delAdmin'])->name('delAdmin');
+    Route::post('/makeInstructor', [AdminController::class, 'makeInstructor'])->name('makeInstructor');
+    Route::post('/delInstructor', [AdminController::class, 'delInstructor'])->name('delInstructor');
 
 });
