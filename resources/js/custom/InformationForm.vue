@@ -9,6 +9,18 @@
             </p>
         </div>
         <form @submit.prevent="sendMail">
+            <div v-show="category == 'algemeen'" class="col-span-6 sm:col-span-4">
+                <jet-label for="emailTo" value="Verzenden naar:" />
+
+                <select id="emailTo" class="mt-1 block w-full rounded-lg border-gray-300" v-model="form.emailTo" ref="emailTo" autocomplete="emailTo" placeholder="Emailto">
+                    <option value="voorzitter">Voorzitter</option>
+                    <option value="penningmeester">Penningmeester</option>
+                    <option value="secretaris">Secretaris</option>
+                    <option value="bestuur">Bestuur</option>
+                    <option value="waterhulpverlening">Waterhulpverlening</option>
+                </select>
+                <jet-input-error :message="form.errors.emailTo" class="mt-2" />
+            </div>
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="name" value="Naam" />
                 <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" ref="name" autocomplete="name" placeholder="Naam"/>
@@ -91,22 +103,14 @@ import JetActionMessage from '@/Jetstream/ActionMessage'
                     name: '',
                     email: '',
                     message: '',
+                    emailTo: '',
                 }),
 
             }
         },
 
         methods: {
-            // reset: function () {
-            //     if (this.editMode) {
-            //         this.form = {
-            //             name: '',
-            //             email: '',
-            //             description: '',
-            //             diploma: '',
-            //         }
-            //     }
-            // },
+
 
             sendMail: function () {
                 this.form.method = 'POST';

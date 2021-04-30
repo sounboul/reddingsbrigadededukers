@@ -693,7 +693,7 @@
                 "symfony/http-kernel": "^4.3.4|^5"
             },
             "require-dev": {
-                "laravel/framework": "^6|^7|^8",
+                "laravel/framework": "^6|^7|^8.40.0",
                 "orchestra/testbench-dusk": "^4|^5|^6",
                 "phpunit/phpunit": "^6|^7|^8",
                 "squizlabs/php_codesniffer": "^3.5"
@@ -1112,7 +1112,7 @@
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "^5.4|^6.0|^7.0|^8.0"
+                "laravel/framework": "^5.4|^6.0|^7.0|^8.40.0"
             },
             "require-dev": {
                 "orchestra/testbench": "~3.0"
