@@ -20,7 +20,7 @@ class ContactController extends Controller
         //$title = 'Test email';
         Mail::to('harmjanbeekhuis@gmail.com')->send(new ContactMail($request));
 
-        return response()->json(['message' => 'Email is verzonden']);
+        return redirect()->back()->with(['success' => 'Email is verzonden']);
 
 
     }
