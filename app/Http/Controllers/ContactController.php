@@ -17,7 +17,7 @@ class ContactController extends Controller
 
     public function sendMail(SendMailRequest $request)
     {
-        //$title = 'Test email';
+
         Mail::to('harmjanbeekhuis@gmail.com')->send(new ContactMail($request));
 
         return redirect()->back()->with(['success' => 'Email is verzonden']);
