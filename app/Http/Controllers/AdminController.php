@@ -10,7 +10,7 @@ class AdminController extends Controller
 {
     public function index() {
         $members = Member::get();
-        $users = User::with('members')->get();
+        $users = User::with(['members','requestedMembers'])->get();
 
         return inertia('Admin/Index', [
             'users' => $users,
@@ -21,8 +21,8 @@ class AdminController extends Controller
     public function confirmCouple(Request $request) {
         $user = User::find($request->input('userID'));
         $member = Member::find($request->input('memberID'));
-
-        $user->members()->updateExistingPivot($member, ['is_confirmed' => 1]);
+        $user->members()->updateExistingPivot($request->input('memberID'), ['is_confirmed' => true]);
+        //$user->members()->updateExistingPivot($member, ['is_confirmed' => 1]);
         return redirect()->back();
     }
 
@@ -76,5 +76,31 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
+    public function makeEditor(Request $request) {
+        $user = User::find($request->input('userID'));
+        $user->is_groupeditor = true;
+        $user->save();
+        return redirect()->back();
+    }
 
+    public function delEditor(Request $request) {
+        $user = User::find($request->input('userID'));
+        $user->is_groupeditor = false;
+        $user->save();
+        return redirect()->back();
+    }
+
+    public function activateMember(Request $request) {
+        $member = Member::find($request->input('memberID'));
+        $member->active = true;
+        $member->save();
+        return redirect()->back();
+    }
+
+    public function deactivateMember(Request $request) {
+        $member = Member::find($request->input('memberID'));
+        $member->active = false;
+        $member->save();
+        return redirect()->back();
+    }
 }

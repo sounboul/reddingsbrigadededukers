@@ -13,11 +13,11 @@
                     <template #content>
                         <div class="text-bold">Gebruiker - Lid</div>
                         <div v-for="user in users" :key="user.id">
-                            <div v-for="member in user.members" :key="member.id">
-                                <div v-if="!member.pivot.is_confirmed" class="p-2">
+                            <div v-for="member in user.requested_members" :key="member.id">
+
                                     <custom-button @click="confirmCouple(user.id, member.id)"><i class="fas fa-link"></i></custom-button>
                                     {{ user.username }} - {{ member.username }} ({{member.pivot.is_confirmed}})
-                                </div>
+
                             </div>
                         </div>
                     </template>
@@ -38,7 +38,7 @@
                         <div class="flex flex-col space-y-5 w-full">
                             <table class="table-auto">
                                 <tbody>
-                                    <tr v-for="user in users" :key='user.id' class="flex justify-center space-x-2">
+                                    <tr v-for="user in users" :key='user.id' class=" space-x-4">
                                         <td><inertia-link :href="route('user.show', user)">{{ user.username }}</inertia-link></td>
                                         <td>
                                             <custom-button v-if="!user.is_active" @click="activateUser(user.id)" color="yellow"><i class="fas fa-user-slash"></i></custom-button>
@@ -51,6 +51,10 @@
                                         <td>
                                             <custom-button v-if="!user.is_instructor" @click="makeInstructor(user.id)" color="yellow"><i class="fas fa-university"></i></custom-button>
                                             <custom-button v-if="user.is_instructor" @click="delInstructor(user.id)" color="green"><i class="fas fa-university"></i></custom-button>
+                                        </td>
+                                        <td>
+                                            <custom-button v-if="!user.is_groupeditor" @click="makeEditor(user.id)" color="yellow"><i class="far fa-edit"></i></custom-button>
+                                            <custom-button v-if="user.is_groupeditor" @click="delEditor(user.id)" color="green"><i class="far fa-edit"></i></custom-button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -67,12 +71,22 @@
                     <template #description></template>
                     <template #content>
                         <div class="flex flex-col space-y-5 w-full">
-                            <div v-for="member in members" :key='member.id' class="flex justify-center">
+                            <table class="table-auto">
+                                <tbody>
+                                    <tr v-for="member in members" :key='member.id' class=" space-x-4">
+                                        <td><inertia-link :href="route('leden.show', member)">{{ member.username }}</inertia-link></td>
+                                        <td>
+                                            <custom-button v-if="!member.active" @click="activateMember(member.id)" color="yellow"><i class="fas fa-user-slash"></i></custom-button>
+                                            <custom-button v-if="member.active" @click="deactivateMember(member.id)" color="green"><i class="fas fa-user-check"></i></custom-button>
+                                        </td>
 
-                                    {{ member.username }}
+                                    </tr>
+                                </tbody>
+                            </table>
 
-                            </div>
                         </div>
+
+
                     </template>
                 </basic-element>
             </div>
@@ -122,6 +136,7 @@ export default {
             this.$emit('close')
         },
         confirmCouple(userID, memberID) {
+            console.log('confirm')
             this.coupleForm.memberID = memberID
             this.coupleForm.userID = userID
             this.$inertia.post('/confirmCouple/', this.coupleForm)
@@ -151,6 +166,26 @@ export default {
             this.coupleForm.userID = userID
             this.$inertia.post('/delInstructor/', this.coupleForm)
         },
+
+        makeEditor(userID) {
+            this.coupleForm.userID = userID
+            this.$inertia.post('/makeEditor/', this.coupleForm)
+        },
+        delEditor(userID) {
+            this.coupleForm.userID = userID
+            this.$inertia.post('/delEditor/', this.coupleForm)
+        },
+
+
+        activateMember(memberID) {
+            this.coupleForm.memberID = memberID
+            this.$inertia.post('/activateMember/', this.coupleForm)
+        },
+        deactivateMember(memberID) {
+            this.coupleForm.memberID = memberID
+            this.$inertia.post('/deactivateMember/', this.coupleForm)
+        },
+
     },
     data: function() {
         return {
@@ -172,6 +207,7 @@ export default {
                 _method: 'POST',
                 memberID: '',
                 userID: '',
+                memberID: '',
             })
         }
     },

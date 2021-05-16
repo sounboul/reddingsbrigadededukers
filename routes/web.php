@@ -34,7 +34,7 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'sendMail'])->name('contact.sendMail');
 
 // Authenticate
-Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
+Route::group(['middleware' => ['auth:sanctum', 'verified',]], function() {
     Route::resource('/leden', LedenController::class)->parameters([
         'leden' => 'leden:username']);
     Route::resource('/groepen', GroupController::class)->parameters([
@@ -43,19 +43,27 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/ledenzoeken', [LedenController::class, 'searchMembers'])->name('leden.search');
     Route::post('/couplememberuser', [LedenController::class, 'coupleUser'])->name('leden.coupleUser');
     Route::post('/decouplememberuser', [LedenController::class, 'decoupleUser'])->name('leden.decoupleUser');
-    Route::post('/addMemberToGroup', [LedenController::class, 'addMemberToGroup'])->name('addMemberToGroup');
+    Route::post('/addMemberToGroup', [LedenController::class, 'addßMemberToGroup'])->name('addMemberToGroup');
     Route::post('/removeMemberFromGroup', [LedenController::class, 'removeMemberFromGroup'])->name('removeMemberFromGroup');
 
 
     // Admin
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-    Route::post('/confirmCouple', [AdminController::class, 'confirmCouple'])->name('confirmCouple');
-    Route::post('/unconfirmCouple', [AdminController::class, 'unconfirmCouple'])->name('unconfirmCouple');
-    Route::get('users/{username}', [UserController::class, 'show'])->name('user.show');
-    Route::post('/activateUser', [AdminController::class, 'activateUser'])->name('activateUser');
-    Route::post('/makeAdmin', [AdminController::class, 'makeAdmin'])->name('makeAdmin');
-    Route::post('/delAdmin', [AdminController::class, 'delAdmin'])->name('delAdmin');
-    Route::post('/makeInstructor', [AdminController::class, 'makeInstructor'])->name('makeInstructor');
-    Route::post('/delInstructor', [AdminController::class, 'delInstructor'])->name('delInstructor');
+    Route::group(['middleware' => []],function () {
+        Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+        Route::post('/confirmCouple', [AdminController::class, 'confirmCouple'])->name('confirmCouple');
+        Route::post('/unconfirmCouple', [AdminController::class, 'unconfirmCouple'])->name('unconfirmCouple');
+        Route::get('users/{username}', [UserController::class, 'show'])->name('user.show');
+        Route::post('/activateUser', [AdminController::class, 'activateUser'])->name('activateUser');
+        Route::post('/deactivateUser', [AdminController::class, 'deactivateUser'])->name('deactivateUser');
+        Route::post('/makeAdmin', [AdminController::class, 'makeAdmin'])->name('makeAdmin');
+        Route::post('/delAdmin', [AdminController::class, 'delAdmin'])->name('delAdmin');
+        Route::post('/makeInstructor', [AdminController::class, 'makeInstructor'])->name('makeInstructor');
+        Route::post('/delInstructor', [AdminController::class, 'delInstructor'])->name('delInstructor');
+        Route::post('/makeEditor', [AdminController::class, 'makeEditor'])->name('makeEditor');
+        Route::post('/delEditor', [AdminController::class, 'delEditor'])->name('delEditor');
+
+        Route::post('/activateMember', [AdminController::class, 'activateMember'])->name('activateMember');
+        Route::post('/deactivateMember', [AdminController::class, 'deactivateMember'])->name('deactivateMember');
+    });
 
 });

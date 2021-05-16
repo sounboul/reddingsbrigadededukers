@@ -193,6 +193,12 @@
                 Er zijn geen notificaties
             </div>
         </jet-modal>
+        <jet-modal :show='showError && $page.props.error' @close="showError = false">
+            <div class="bg-red-400 p-6 text-white">
+                {{ $page.props.error }}
+            </div>
+
+        </jet-modal>
     </div>
 
 </template>
@@ -242,6 +248,7 @@
                 hasNotifications: true,
                 isOpen: false,
                 category: '',
+                showError: true,
             }
         },
 
@@ -272,6 +279,15 @@
                 this.category = this.setCategory
             }
         },
-        emits: ['close']
+        emits: ['close'],
+        // computed: {
+        //     showError: function () {
+        //         if (this.$page.props.error) {
+        //             return true
+        //         } else {
+        //             return false
+        //         }
+        //     }
+        // }
     }
 </script>

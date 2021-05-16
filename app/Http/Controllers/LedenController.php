@@ -15,14 +15,16 @@ class LedenController extends Controller
     public function index()
     {
 
-        $user = User::with(['members' => function($q)
+        $user = User::with([
+            'confirmedMembers' => function($q)
             {
                 $q->select('username', 'member_id');
-            }, 'requestedMembers' => function($q)
+            },
+            'requestedMembers' => function($q)
             {
                 $q->select('username', 'member_id');
             }
-            ])->select('id', 'username','is_admin','is_groupeditor','is_instructor')->find(auth()->id());
+            ])->select('id', 'username','is_admin','is_groupeditor','is_instructor','is_active')->find(auth()->id());
         return inertia('Leden/Index', [
             'user' => $user,
         ]);

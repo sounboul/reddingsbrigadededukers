@@ -54,6 +54,7 @@ class User extends Authenticatable
         'is_admin' => 'boolean',
         'is_instructor' => 'boolean',
         'is_groupeditor' => 'boolean',
+        'is_active' => 'boolean',
     ];
 
     /**
@@ -65,8 +66,12 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function members() {
+    public function confirmedMembers() {
         return $this->BelongsToMany(Member::class)->withPivot('is_confirmed')->wherePivot('is_confirmed', 1);
+    }
+
+    public function members() {
+        return $this->BelongsToMany(Member::class)->withPivot('is_confirmed');
     }
 
     public function requestedMembers() {

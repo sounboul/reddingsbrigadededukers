@@ -18,10 +18,12 @@
                         <div>
                             Je bent:
                             <ul>
+                                <li v-if="user.is_active">actief</li>
                                 <li v-if="user.is_admin">admin</li>
                                 <li v-if="user.is_instructor">instructeur</li>
                                 <li v-if="user.is_groupeditor">editor</li>
                             </ul>
+
 
 
                         </div>
@@ -38,10 +40,8 @@
 
                     <template #content>
 
-                        <div v-if="user.is_admin">Is admin</div>
-
                         <div class="flex flex-col space-y-5 w-full">
-                            <div v-for="member in user.members" :key='member.id' class="flex justify-center">
+                            <div v-for="member in user.confirmed_members" :key='member.id' class="flex justify-center">
                                 <div>
                                     <link-button :href="route('leden.show', member)">
                                         {{ member.username }}

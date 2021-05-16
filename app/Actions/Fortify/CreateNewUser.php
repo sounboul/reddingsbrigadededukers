@@ -3,8 +3,11 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
+use Exception;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
 
@@ -30,7 +33,8 @@ class CreateNewUser implements CreatesNewUsers
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
 
-        return User::create([
+
+        User::create([
             'username' => $input['username'],
             'firstname' => $input['firstname'],
             'tussenvoegsel' => $input['tussenvoegsel'],
@@ -38,5 +42,9 @@ class CreateNewUser implements CreatesNewUsers
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
+
+        throw new AuthenticationException;
+
+
     }
 }
