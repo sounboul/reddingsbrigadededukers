@@ -29,6 +29,51 @@
                         </div>
                     </template>
                 </basic-element>
+
+                <basic-element>
+                    <template #title>
+                        Berichten
+                    </template>
+                    <template #description>
+                    </template>
+                    <template #content>
+                        <div>
+                            <form @submit.prevent="store">
+                                <div class="col-span-6 sm:col-span-4">
+                                    <jet-label for="title" value="title" />
+                                    <jet-input id="title" type="text" class="mt-1 block w-full" v-model="form.title" ref="title" autocomplete="title" />
+                                    <jet-input-error :message="form.errors.title" class="mt-2" />
+
+                                </div>
+
+                                <div class="col-span-6 sm:col-span-4">
+                                    <jet-label for="message" value="message" />
+                                    <!-- <jet-input id="message" type="text" class="mt-1 block w-full" v-model="form.message" ref="message" autocomplete="messageword" /> -->
+                                    <textarea id="message" class="mt-1 block w-full" v-model="form.message" ref="message" autocomplete="message"></textarea>
+                                    <jet-input-error :message="form.errors.message" class="mt-2" />
+                                </div>
+
+                                <div class="flex">
+                                    <crud-button  type="submit">Toevoegen</crud-button>
+                                </div>
+                            </form>
+
+
+                        </div>
+                        <div>
+
+                                <div v-for="post in posts" :key="post.id" class="p-4 m-2 border-gray-200 border-2 rounded-lg">
+                                    <div class="flex pb-1">
+                                        <div class="font-bold flex-1 ">{{ post.title }}  </div>
+                                        <div class="flex ">  {{ post.createdAtHumanReadable }}</div>
+                                    </div>
+                                    <div>{{ post.message }}</div>
+                                </div>
+
+                        </div>
+                    </template>
+                </basic-element>
+
                 <basic-element>
                     <template #title>
                         Leden gekoppeld aan dit account
@@ -128,11 +173,16 @@ import BasicElement from '@/custom/BasicElement'
 import LinkButton from '@/custom/LinkButton'
 import CustomButton from '@/custom/CustomButton'
 import JetButton from '@/Jetstream/Button'
+import JetLabel from '@/Jetstream/Label'
+import JetInput from '@/Jetstream/Input'
+import CrudButton from '@/custom/CrudButton'
+import JetInputError from '@/Jetstream/InputError'
 
 export default {
     props: {
         user: Object,
         filteredmembers: Object,
+        posts: Object,
     },
     methods: {
         openModal: function () {
@@ -155,13 +205,37 @@ export default {
             this.$inertia.post('/couplememberuser/', member)
             this.$emit('close')
         },
+        reset: function () {
+            this.form = {
+                title: '',
+                message: '',
+                visible: true,
+            }
+        },
+        store() {
+            this.form.user_id = this.user.id
+            this.form.method = 'POST'
+            this.form.post('/posts', {
+                errorBag: 'storePost',
+                preserveScrol: true,
+                onFinish: () => this.form.reset,
+            });
+
+        }
     },
-    data: function() {
+    data() {
         return {
             isOpen: false,
             filteredMembers: Object,
             confirmSearch: false,
             createNew: false,
+            form: this.$inertia.form({
+                title: '',
+                message: '',
+                visible: true,
+                user_id: '',
+                category_id: 1,
+            }),
         }
     },
     components: {
@@ -172,7 +246,11 @@ export default {
         BasicElement,
         LinkButton,
         CustomButton,
-        JetButton
+        JetButton,
+        JetLabel,
+        JetInput,
+        CrudButton,
+        JetInputError,
     },
 }
 </script>

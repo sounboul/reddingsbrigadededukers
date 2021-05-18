@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\ActiviteitenController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LedenController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\TimeslotController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerenigingController;
@@ -40,6 +42,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified',]], function() {
     Route::resource('/groepen', GroupController::class)->parameters([
         'groepen' => 'groepen:name']);
     Route::resource('/timeslots', TimeslotController::class);
+    Route::resource('/posts', PostController::class);
+    Route::resource('/categories', CategoryController::class);
     Route::get('/ledenzoeken', [LedenController::class, 'searchMembers'])->name('leden.search');
     Route::post('/couplememberuser', [LedenController::class, 'coupleUser'])->name('leden.coupleUser');
     Route::post('/decouplememberuser', [LedenController::class, 'decoupleUser'])->name('leden.decoupleUser');

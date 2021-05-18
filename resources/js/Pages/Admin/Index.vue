@@ -89,6 +89,18 @@
 
                     </template>
                 </basic-element>
+                <basic-element>
+                    <template #content>
+                        <form @submit.prevent="storeCategory">
+                            <input id="name" v-model="catForm.name" />
+                            <crud-button type="submit" :disabled="form.processing">+</crud-button>
+                        </form>
+                        <ul>
+                            <li v-for="category in categories" :key="category.id">{{ category.name }}</li>
+                        </ul>
+                    </template>
+                </basic-element>
+
             </div>
         </div>
     </app-layout>
@@ -103,6 +115,8 @@ import BasicElement from '@/custom/BasicElement'
 import LinkButton from '@/custom/LinkButton'
 import CustomButton from '@/custom/CustomButton'
 import JetButton from '@/Jetstream/Button'
+import CrudButton from '@/custom/CrudButton'
+
 
 
 
@@ -111,8 +125,12 @@ export default {
     props: {
         users: Object,
         members: Object,
+        categories: Object,
     },
     methods: {
+        storeCategory: function () {
+            this.catForm.post('/categories')
+        },
         openModal: function () {
             this.isOpen = true;
         },
@@ -208,6 +226,10 @@ export default {
                 memberID: '',
                 userID: '',
                 memberID: '',
+            }),
+            catForm: this.$inertia.form({
+                _method:'POST',
+                name: '',
             })
         }
     },
@@ -219,7 +241,8 @@ export default {
         BasicElement,
         LinkButton,
         CustomButton,
-        JetButton
+        JetButton,
+        CrudButton
     },
 }
 </script>

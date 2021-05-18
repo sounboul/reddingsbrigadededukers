@@ -38,9 +38,12 @@ class JetstreamServiceProvider extends ServiceProvider
         Fortify::authenticateUsing(function (Request $request) {
             $user = User::where('email', $request->email)->first();
 
-            if (!$user->is_active) {
-                throw ValidationException::withMessages(['Het account is wel aangemaakt, maar nog niet actief. Uw account zal op korte termijn geactiveerd worden. Neem bij problemen contact op.']);
+            if ($user) {
+                if (!$user->is_active) {
+                    throw ValidationException::withMessages(['Het account is wel aangemaakt, maar nog niet actief. Uw account zal op korte termijn geactiveerd worden. Neem bij problemen contact op.']);
+                }
             }
+
 
             if ($user &&
                 Hash::check($request->password, $user->password)) {

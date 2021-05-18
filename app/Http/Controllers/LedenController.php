@@ -6,6 +6,7 @@ use App\Http\Requests\CreateMemberRequest;
 use App\Http\Requests\UpdateMemberRequest;
 use App\Models\Group;
 use App\Models\Member;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,7 @@ class LedenController extends Controller
 {
     public function index()
     {
-
+        $posts = Post::orderBy('created_at', 'DESC')->get();
         $user = User::with([
             'confirmedMembers' => function($q)
             {
@@ -27,6 +28,7 @@ class LedenController extends Controller
             ])->select('id', 'username','is_admin','is_groupeditor','is_instructor','is_active')->find(auth()->id());
         return inertia('Leden/Index', [
             'user' => $user,
+            'posts' => $posts,
         ]);
     }
 
